@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Event Management System</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header class="main-header">
+        <div class="logo">
+            <img src="logo.png" alt="Logo">
+        </div>
+        <!-- Message Shower Modal -->
+    <div id="message-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" id="message-close-btn">&times;</span>
+            <p id="modal-message-text"></p>
+        </div>
+    </div>
+        <nav class="main-nav">
+            <ul>
+                <li><a href="#" id="home-link">Home</a></li>
+                <li><a href="#" id="registered-events-link">Registered Events</a></li>
+                <li><a href="#" class="login-btn" id="login-btn">Login</a></li>
+                <li><a href="#" class="user-btn" id="user-btn" style="display:none;"></a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="hero" id="hero-section">
+            <div class="hero-content">
+                <h1 class="heading-bg">
+                    <span class="word">Event</span>
+                    <span class="word">Management</span>
+                    <span class="word">System</span>
+                </h1>
+                <div class="hero-textbox">
+                    Welcome to the Event Management System! Easily discover, register, and manage your events all in one place.
+                </div>
+            </div>
+        </div>
+
+        <section class="events-section" id="events-section">
+            <h2>Upcoming Events</h2>
+            <div class="event-filters" style="display: flex; gap: 1rem; justify-content: center; align-items: center; margin-bottom: 2rem; flex-wrap: wrap;">
+                <input type="text" id="event-search" placeholder="Search events..." style="padding: 0.7rem 1.2rem; border-radius: 8px; border: 1px solid #ccc; font-size: 1.1rem; min-width: 220px;">
+                <select id="event-category-filter" style="padding: 0.7rem 1.2rem; border-radius: 8px; border: 1px solid #ccc; font-size: 1.1rem;">
+                    <option value="all">All Categories</option>
+                    <option value="tech">Tech</option>
+                    <option value="music">Music</option>
+                    <option value="business">Business</option>
+                    <option value="sports">Sports</option>
+                    <option value="art">Art</option>
+                </select>
+            </div>
+            <div class="event-cards-container" id="event-cards-container">
+                <!-- Event cards will be rendered here by JS, including countdown timer -->
+            </div>
+            <div class="motivation-message" style="margin: 2rem auto; max-width: 700px; text-align: center; font-size: 1.3rem; color: #357ABD; font-weight: 600;">
+                <p>Dream big, plan boldly, and make your mark! <br> Organize your own event and inspire others—your ideas can shape our campus community. Take the first step today!</p>
+            </div>
+        </section>
+
+        <section class="event-details-section" id="event-details-section" style="display: none;">
+            <div class="event-details-content" id="event-details-content">
+                </div>
+        </section>
+
+        <section class="admin-dashboard" id="admin-dashboard" style="display: none;">
+            <h2>Admin Dashboard</h2>
+            <form id="create-event-form">
+                <h3>Create New Event</h3>
+                <input type="text" id="event-name" placeholder="Event Name" required>
+                <input type="text" id="event-image-url" placeholder="Image URL" required>
+                    <input type="date" id="event-date" required>
+                    <select id="event-category" required style="padding: 0.7rem 1.2rem; border-radius: 8px; border: 1px solid #ccc; font-size: 1.1rem;">
+                        <option value="">Select Category</option>
+                        <option value="tech">Tech</option>
+                        <option value="music">Music</option>
+                        <option value="business">Business</option>
+                        <option value="sports">Sports</option>
+                        <option value="art">Art</option>
+                    </select>
+                    <textarea id="event-description" placeholder="Event Description" required></textarea>
+                    <input type="number" id="event-seats" placeholder="Total Seats" required>
+                <button type="submit">Create Event</button>
+            </form>
+            <div class="admin-event-list">
+                <h3>Manage Existing Events</h3>
+                <ul id="admin-event-list">
+                    </ul>
+            </div>
+        </section>
+    </main>
+
+    <div id="login-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <form id="student-login-form">
+                <h2>Student Login</h2>
+                <input type="email" id="student-email" placeholder="Email" required>
+                <input type="password" id="student-password" placeholder="Password" required>
+                <button type="submit">Login</button>
+                <span id="student-message"></span>
+                <a href="#" id="show-register-link">Register as New Student</a>
+                <a href="#" id="admin-login-link">Admin Login</a>
+            </form>
+
+            <form id="student-register-form" style="display:none;">
+                <h2>Student Registration</h2>
+                <input type="email" id="register-email" placeholder="Email" required>
+                <input type="password" id="register-password" placeholder="Password" required>
+                <button type="submit">Register</button>
+                <span id="register-message"></span>
+                <a href="#" id="show-login-link">Back to Login</a>
+            </form>
+            <div id="admin-login-form" style="display: none;">
+                <h3>Admin Login</h3>
+                <form id="admin-login-form-submit">
+                    <input type="text" id="admin-user-id" placeholder="Admin User ID" required>
+                    <input type="password" id="admin-password" placeholder="Password" required>
+                    <button type="submit">Login</button>
+                </form>
+                <p id="admin-message"></p>
+                <a href="#" id="student-login-link">Student Login?</a>
+            </div>
+        </div>
+    </div>
+    <!-- About Section -->
+<section id="about">
+  <h2>About Us</h2>
+  <p>
+    Our Event Management System helps students register for college events 
+    easily, track seat availability in real-time, and never miss an 
+    opportunity to participate.
+  </p>
+  <div class="about-cards">
+    <div class="card">🎉 Easy Registrations</div>
+    <div class="card">📊 Seat Limit Tracking</div>
+    <div class="card">💳 Free & Paid Events</div>
+  </div>
+</section>
+
+<!-- Contact Us Section -->
+<section id="contact">
+  <h2>Contact Us</h2>
+  <form id="contactForm">
+    <input type="text" placeholder="Your Name" required>
+    <input type="email" placeholder="Your Email" required>
+    <textarea placeholder="Your Message" required></textarea>
+    <button type="submit">Send Message</button>
+  </form>
+</section>
+
+<!-- Footer -->
+<footer>
+  <p>© 2025 Event Management System | All Rights Reserved</p>
+  <div class="footer-links">
+    <a href="#">Home</a> |
+    <a href="#about">About</a> |
+    <a href="#contact">Contact</a>
+  </div>
+</footer>
+
+    
+    <script src="script.js"></script>
+</body>
+</html>
