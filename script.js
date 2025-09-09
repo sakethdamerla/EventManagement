@@ -191,7 +191,7 @@ function initializeCountdownTimers() {
         if (event) {
             hideAllSections();
             eventDetailsSection.style.display = 'block';
-            
+            window.scrollTo({ top: 0, behavior: 'smooth' });
             eventDetailsSection.innerHTML = `
                 <div class="event-details-content">
                     <button class="back-btn" id="back-to-home">Back to Events</button>
@@ -279,10 +279,11 @@ function initializeCountdownTimers() {
     }
 
     function showHomePage() {
-        hideAllSections();
-        heroSection.style.display = 'flex';
-        eventsSection.style.display = 'block';
-        renderEventCards();
+    hideAllSections();
+    heroSection.style.display = 'flex';
+    eventsSection.style.display = 'block';
+    renderEventCards();
+    // Do NOT show login modal automatically
     }
 
     function showAdminDashboard() {
@@ -555,6 +556,7 @@ function updateSeatBar(eventId, availableSeats, totalSeats) {
     eventCardsContainer.addEventListener('click', (e) => {
         const card = e.target.closest('.event-card');
         if (card) {
+            e.preventDefault(); // Prevent anchor or scroll behavior
             showEventDetails(card.dataset.id);
         }
     });
@@ -610,31 +612,11 @@ function updateSeatBar(eventId, availableSeats, totalSeats) {
     initializeData();
     showHomePage();
     updateHeaderUI(); // Initial check for logged-in user
+    // Ensure message modal is hidden on page load
+    if (messageModal) messageModal.style.display = 'none';
+    // Do NOT show login modal automatically
 });
-function initializeIdeaData() {
-        if (!localStorage.getItem('studentIdeas')) {
-            localStorage.setItem('studentIdeas', JSON.stringify([]));
-        }
-    }
-
-    function renderIdeaCards() {
-        ideaBoard.innerHTML = '<h3>Student Idea Board</h3>'; // Reset the board
-        const ideas = JSON.parse(localStorage.getItem('studentIdeas')) || [];
-        if (ideas.length === 0) {
-            ideaBoard.innerHTML += '<p style="text-align: center;">No ideas have been submitted yet. Be the first!</p>';
-        } else {
-            ideas.forEach(idea => {
-                const ideaCard = document.createElement('div');
-                ideaCard.className = 'idea-card';
-                ideaCard.innerHTML = `
-                    <h4>${idea.title}</h4>
-                    <p>${idea.description}</p>
-                    <p><small>Submitted by: ${idea.userEmail}</small></p>
-                `;
-                ideaBoard.appendChild(ideaCard);
-            });
-        }
-    }
+// 
     
 // In renderEventCards:
 card.innerHTML = `
