@@ -86,9 +86,58 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    
+    function renderAdminRatings() {
+        if (!adminRatingsTable) return;
+        const events = getEvents();
+        const ratings = getRatings();
+        const tbody = adminRatingsTable.querySelector('tbody');
+        tbody.innerHTML = '';
+        const now = new Date();
+        const completed = events.filter(ev => new Date(ev.date) < now);
+        completed.forEach(event => {
+            const eventRatings = ratings[event.id] || {};
+            const ratingValues = Object.values(eventRatings).filter(r => r > 0);
+            const avg = ratingValues.length ? (ratingValues.reduce((a,b)=>a+b,0)/ratingValues.length).toFixed(2) : '-';
+            const tr = document.createElement('tr');
+            tr.innerHTML = `<td>${event.name}</td><td>${avg}</td><td>${ratingValues.length}</td>`;
+            tbody.appendChild(tr);
+        });
+    }
 
-    
+    // Show completed events section on homepage
+    function showHomePage() {
+        hideAllSections();
+        heroSection.style.display = 'flex';
+        eventsSection.style.display = 'block';
+        if (completedEventsSection) completedEventsSection.style.display = 'block';
+        renderEventCards();
+        renderCompletedEvents();
+    }
+
+    // Show ratings table in admin dashboard
+    function showAdminDashboard() {
+        hideAllSections();
+        adminDashboard.style.display = 'block';
+        renderAdminEvents();
+        renderAdminRatings();
+    }
+    // Event Filters & Search
+    const eventSearchInput = document.getElementById('event-search');
+    const eventCategoryFilter = document.getElementById('event-category-filter');
+    let currentSearch = '';
+    let currentCategory = 'all';
+    if (eventSearchInput) {
+        eventSearchInput.addEventListener('input', (e) => {
+            currentSearch = e.target.value.toLowerCase();
+            renderEventCards();
+        });
+    }
+    if (eventCategoryFilter) {
+        eventCategoryFilter.addEventListener('change', (e) => {
+            currentCategory = e.target.value;
+            renderEventCards();
+        });
+    }
     // DOM Elements
     const heroWords = document.querySelectorAll('.word');
     const homeLink = document.getElementById('home-link');
@@ -716,3 +765,37 @@ function initializeCountdownTimers() {
 // Call this after rendering event cards
 initializeCountdownTimers();
 
+
+
+// Toggle notification dropdown
+const notifyBtn = document.getElementById("notifyBtn");
+const notifyBox = document.getElementById("notifyBox");
+const notifyList = document.getElementById("notifyList");
+const notifyCount = document.getElementById("notifyCount");
+
+notifyBtn.addEventListener("click", () => {
+  notifyBox.style.display = notifyBox.style.display === "block" ? "none" : "block";
+});
+
+// Function to add new event (admin side)
+function addEventNotification(eventName) {
+  let notifications = JSON.parse(localStorage.getItem("notifications")) || [];
+  notifications.push({ text: `New Event Added: ${eventName}`, time: new Date().toLocaleString() });
+  localStorage.setItem("notifications", JSON.stringify(notifications));
+  showNotifications();
+}
+
+// Function to display notifications (student side)
+function showNotifications() {
+  let notifications = JSON.parse(localStorage.getItem("notifications")) || [];
+  notifyList.innerHTML = "";
+  notifications.forEach(note => {
+    let li = document.createElement("li");
+    li.textContent = `${note.text} (${note.time})`;
+    notifyList.appendChild(li);
+  });
+  notifyCount.textContent = notifications.length;
+}
+
+// Load notifications on page load
+showNotifications();

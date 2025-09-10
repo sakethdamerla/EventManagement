@@ -1,167 +1,4 @@
-/* Completed Event Card Styling */
-.completed-events-section {
-    margin-top: 40px;
-    margin-bottom: 40px;
-    padding: 0 1rem;
-}
-.completed-events-section h2 {
-    text-align: center;
-    font-size: 2rem;
-    color: #357ABD;
-    margin-bottom: 2rem;
-}
-#completed-events-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 2rem;
-    justify-content: center;
-}
-.completed-event-card.event-card {
-    background: #f8f8ff;
-    border: 2px solid #e0e7ff;
-    border-radius: 16px;
-    box-shadow: 0 4px 16px rgba(53,122,189,0.08);
-    width: 320px;
-    min-width: 260px;
-    margin-bottom: 1.5rem;
-    transition: box-shadow 0.2s, transform 0.2s;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    overflow: hidden;
-    opacity: 1;
-}
-.completed-event-card.event-card:hover {
-    box-shadow: 0 8px 32px rgba(53,122,189,0.18);
-    transform: translateY(-4px) scale(1.03);
-}
-.completed-event-card img {
-    width: 100%;
-    height: 160px;
-    object-fit: cover;
-    border-top-left-radius: 16px;
-    border-top-right-radius: 16px;
-    filter: grayscale(20%);
-}
-.completed-event-card .card-content {
-    padding: 1.2rem 1rem 1.5rem 1rem;
-    width: 100%;
-    text-align: left;
-}
-.completed-event-card .card-content h3 {
-    font-size: 1.3rem;
-    color: #357ABD;
-    margin-bottom: 0.5rem;
-}
-.completed-event-card .card-content p {
-    font-size: 1rem;
-    color: #444;
-    margin-bottom: 0.5rem;
-}
-.completed-event-card .rating-ui {
-    margin-top: 0.7em;
-    display: flex;
-    align-items: center;
-    gap: 0.5em;
-}
-.completed-event-card .rating-ui label {
-    font-weight: 500;
-    color: #357ABD;
-}
-.completed-event-card .event-rating-select {
-    padding: 0.3em 0.7em;
-    border-radius: 6px;
-    border: 1px solid #357ABD;
-    font-size: 1rem;
-    background: #fff;
-    color: #357ABD;
-    outline: none;
-    transition: border 0.2s;
-}
-.completed-event-card .event-rating-select:focus {
-    border: 2px solid #e67e22;
-}
-/* Completed Events Section & Cards */
-.completed-events-section {
-    margin-top: 40px;
-    margin-bottom: 40px;
-    padding: 0 1rem;
-}
-.completed-events-section h2 {
-    text-align: center;
-    font-size: 2rem;
-    color: #357ABD;
-    margin-bottom: 2rem;
-}
-#completed-events-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 2rem;
-    justify-content: center;
-}
-.completed-event-card.event-card {
-    background: #f8f8ff;
-    border: 1.5px solid #e0e7ff;
-    border-radius: 16px;
-    box-shadow: 0 4px 16px rgba(53,122,189,0.08);
-    width: 320px;
-    min-width: 260px;
-    margin-bottom: 1.5rem;
-    transition: box-shadow 0.2s, transform 0.2s;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    overflow: hidden;
-}
-.completed-event-card.event-card:hover {
-    box-shadow: 0 8px 32px rgba(53,122,189,0.18);
-    transform: translateY(-4px) scale(1.03);
-}
-.completed-event-card img {
-    width: 100%;
-    height: 160px;
-    object-fit: cover;
-    border-top-left-radius: 16px;
-    border-top-right-radius: 16px;
-}
-.completed-event-card .card-content {
-    padding: 1.2rem 1rem 1.5rem 1rem;
-    width: 100%;
-    text-align: left;
-}
-.completed-event-card .card-content h3 {
-    font-size: 1.3rem;
-    color: #357ABD;
-    margin-bottom: 0.5rem;
-}
-.completed-event-card .card-content p {
-    font-size: 1rem;
-    color: #444;
-    margin-bottom: 0.5rem;
-}
-.completed-event-card .rating-ui {
-    margin-top: 0.7em;
-    display: flex;
-    align-items: center;
-    gap: 0.5em;
-}
-.completed-event-card .rating-ui label {
-    font-weight: 500;
-    color: #357ABD;
-}
-.completed-event-card .event-rating-select {
-    padding: 0.3em 0.7em;
-    border-radius: 6px;
-    border: 1px solid #357ABD;
-    font-size: 1rem;
-    background: #fff;
-    color: #357ABD;
-    outline: none;
-    transition: border 0.2s;
-}
-.completed-event-card .event-rating-select:focus {
-    border: 2px solid #e67e22;
-}
+
 /* Student Registration Form Styles */
 #student-register-form {
     background: #fff;
@@ -583,7 +420,7 @@ body {
 }
 
     .countdown-timer {
-        margin-top: 0.5rem;
+        margin-top: 1rem;
         font-size: 1.15rem;
         color: #e84141;
         background: var(--accent-color);
@@ -990,3 +827,42 @@ footer .footer-links a {
 }
 
 
+
+
+#notifyBtn {
+  background: none;
+  border: none;
+  margin-top:-15px ;
+  font-size: 15px;
+  cursor: pointer;
+  position: relative;
+}
+
+#notifyBox {
+  position: absolute;
+  top: 60px;
+  right: 20px;
+  width: 250px;
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 10px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  display: none;
+  z-index: 1000;
+}
+
+#notifyBox ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+#notifyBox li {
+  padding: 8px;
+  border-bottom: 1px solid #eee;
+}
+
+#notifyBox li:last-child {
+  border-bottom: none;
+}
