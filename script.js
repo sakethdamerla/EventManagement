@@ -347,7 +347,8 @@ function initializeCountdownTimers() {
                     registeredEvents[loggedInUser].push(event.id);
                     setRegisteredEvents(registeredEvents);
                     showMessage('Registration successful!');
-                    renderEventCards(); // Refresh all event cards to update seat bar and count
+                    renderEventCards();
+                    addEventNotification(newEvent.name);
                     if (event.availableSeats <= 0) {
                         registerBtn.disabled = true;
                         registerBtn.textContent = 'Sold Out';
@@ -797,5 +798,7 @@ function showNotifications() {
   notifyCount.textContent = notifications.length;
 }
 
+
 // Load notifications on page load
 showNotifications();
+
