@@ -16,23 +16,79 @@
     });
 
 document.addEventListener('DOMContentLoaded', () => {
-    // Event Filters & Search
-    const eventSearchInput = document.getElementById('event-search');
-    const eventCategoryFilter = document.getElementById('event-category-filter');
-    let currentSearch = '';
-    let currentCategory = 'all';
-    if (eventSearchInput) {
-        eventSearchInput.addEventListener('input', (e) => {
-            currentSearch = e.target.value.toLowerCase();
-            renderEventCards();
+    // Completed Events & Ratings
+    const completedEventsSection = document.getElementById('completed-events-section');
+    const completedEventsList = document.getElementById('completed-events-list');
+    const adminRatingsTable = document.getElementById('admin-ratings-table');
+
+    function getRatings() {
+        return JSON.parse(localStorage.getItem('eventRatings') || '{}');
+    }
+    function setRatings(ratings) {
+        localStorage.setItem('eventRatings', JSON.stringify(ratings));
+    }
+
+    function renderCompletedEvents() {
+        if (!completedEventsList) return;
+        completedEventsList.innerHTML = '';
+        const events = getEvents();
+        const now = new Date();
+        const completed = events.filter(ev => new Date(ev.date) < now);
+        if (completed.length === 0) {
+            completedEventsList.innerHTML = '<p>No completed events yet.</p>';
+            return;
+        }
+        const currentUser = localStorage.getItem('currentUser');
+        completed.forEach(event => {
+            const ratings = getRatings();
+            const userRating = ratings[event.id]?.[currentUser] || 0;
+            const card = document.createElement('div');
+            card.className = 'event-card completed-event-card';
+            card.dataset.id = event.id;
+            card.innerHTML = `
+                <img src="${event.imageUrl}" alt="${event.name}">
+                <div class="card-content">
+                    <h3>${event.name}</h3>
+                    <p>${event.description}</p>
+                    <p><strong>Date:</strong> ${event.date}</p>
+                    <div class="rating-ui" data-event-id="${event.id}" style="margin-top:0.7em;">
+                        <label style="font-weight:500;">Rate this event:</label>
+                        <select class="event-rating-select" style="margin-left:0.5em;">
+                            <option value="0">--</option>
+                            <option value="1" ${userRating==1?'selected':''}>1</option>
+                            <option value="2" ${userRating==2?'selected':''}>2</option>
+                            <option value="3" ${userRating==3?'selected':''}>3</option>
+                            <option value="4" ${userRating==4?'selected':''}>4</option>
+                            <option value="5" ${userRating==5?'selected':''}>5</option>
+                        </select>
+                    </div>
+                </div>
+            `;
+            completedEventsList.appendChild(card);
+        });
+        // Add rating change listeners
+        document.querySelectorAll('.event-rating-select').forEach(sel => {
+            sel.addEventListener('change', function(e) {
+                const eventId = this.parentElement.getAttribute('data-event-id');
+                const rating = parseInt(this.value);
+                const currentUser = localStorage.getItem('currentUser');
+                if (!currentUser || currentUser === 'admin') {
+                    showMessage('Only students can rate events.');
+                    this.value = 0;
+                    return;
+                }
+                let ratings = getRatings();
+                if (!ratings[eventId]) ratings[eventId] = {};
+                ratings[eventId][currentUser] = rating;
+                setRatings(ratings);
+                renderAdminRatings();
+            });
         });
     }
-    if (eventCategoryFilter) {
-        eventCategoryFilter.addEventListener('change', (e) => {
-            currentCategory = e.target.value;
-            renderEventCards();
-        });
-    }
+
+    
+
+    
     // DOM Elements
     const heroWords = document.querySelectorAll('.word');
     const homeLink = document.getElementById('home-link');
@@ -78,7 +134,8 @@ document.addEventListener('DOMContentLoaded', () => {
             const initialEvents = [
                 { id: 1, name: 'AI & Robotics Summit', imageUrl: 'https://images.unsplash.com/photo-1518770660439-46e382c16110?q=80&w=2070&auto=format', date: '2025-10-25', description: 'A deep dive into the latest advancements in artificial intelligence and robotics.', seats: 150, availableSeats: 150 },
                 { id: 2, name: 'Global Music Festival', imageUrl: 'https://images.unsplash.com/photo-1490109962388-1ac495a62f83?q=80&w=2070&auto=format', date: '2025-11-15', description: 'Experience a fusion of cultures and music from around the world.', seats: 500, availableSeats: 500 },
-                { id: 3, name: 'Startup Pitch Day', imageUrl: 'https://images.unsplash.com/photo-1556761175-5973dc0f32e7?q=80&w=2070&auto=format', date: '2025-12-05', description: 'Listen to innovative ideas and witness the next big thing in tech.', seats: 75, availableSeats: 75 }
+                { id: 3, name: 'Startup Pitch Day', imageUrl: 'https://images.unsplash.com/photo-1556761175-5973dc0f32e7?q=80&w=2070&auto=format', date: '2025-12-05', description: 'Listen to innovative ideas and witness the next big thing in tech.', seats: 75, availableSeats: 75 },
+                { id: 4, name: 'Completed Tech Talk', imageUrl: 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?q=80&w=2070&auto=format', date: '2025-08-01', description: 'A past event for testing completed events.', seats: 100, availableSeats: 0 }
             ];
             localStorage.setItem('events', JSON.stringify(initialEvents));
         }
@@ -658,3 +715,4 @@ function initializeCountdownTimers() {
 
 // Call this after rendering event cards
 initializeCountdownTimers();
+
