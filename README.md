@@ -1,5 +1,5 @@
 # Event Management System
-This is a simple, front-end web application for managing and registering for events. It's built entirely with HTML, CSS, and vanilla JavaScript, using localStorage for data persistence. This project demonstrates core web development concepts without relying on external frameworks or libraries.
+**This** is a simple, front-end web application for managing and registering for events. It's built entirely with HTML, CSS, and vanilla JavaScript, using localStorage for data persistence. This project demonstrates core web development concepts without relying on external frameworks or libraries.
 
 ## Features
 Dynamic Home Page: A visually appealing home page with a background image and an animated heading.
