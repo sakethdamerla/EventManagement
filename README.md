@@ -1,7 +1,7 @@
 # Event Management System
 This is a simple, front-end web application for managing and registering for events. It's built entirely with HTML, CSS, and vanilla JavaScript, using localStorage for data persistence. This project demonstrates core web development concepts without relying on external frameworks or libraries.
 
-Features
+## Features
 Dynamic Home Page: A visually appealing home page with a background image and an animated heading.
 
 Event Listings: Displays upcoming events in interactive cards, each with an image and name.
@@ -10,7 +10,7 @@ Event Details View: Clicking an event card takes the user to a dedicated page sh
 
 Real-time Seat Counter: The number of available seats updates automatically when a user registers. The "Register Now" button is blocked when seats are sold out.
 
-User Authentication:
+## User Authentication:
 
 Student Login: Students can log in using their email and a temporary OTP (stored in localStorage).
 
@@ -29,7 +29,7 @@ Open the index.html file in your web browser.
 
 No server or additional setup is required. The application uses your browser's localStorage to save all data.
 
-Code Structure
+## Code Structure
 The project is organized into three main files:
 
 index.html: The main HTML file containing the structure for all pages and sections, including the home page, event details, login modals, and the admin dashboard.
@@ -44,7 +44,7 @@ UI Manipulation: Dynamically updates the page content based on user actions and 
 
 Event Listeners: Manages form submissions, button clicks, and navigation.
 
-Admin Credentials
+## Admin Credentials
 For testing purposes, the admin credentials are:
 
 User ID: admin123
