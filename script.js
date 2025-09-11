@@ -1,4 +1,5 @@
-    // --- Event Filters & Search ---
+
+// --- Event Filters & Search ---
     const eventSearchInput = document.getElementById('event-search');
     const eventCategoryFilter = document.getElementById('event-category-filter');
 
@@ -181,10 +182,9 @@ document.addEventListener('DOMContentLoaded', () => {
     function initializeData() {
         if (!localStorage.getItem('events')) {
             const initialEvents = [
-                { id: 1, name: 'AI & Robotics Summit', imageUrl: 'https://images.unsplash.com/photo-1518770660439-46e382c16110?q=80&w=2070&auto=format', date: '2025-10-25', description: 'A deep dive into the latest advancements in artificial intelligence and robotics.', seats: 150, availableSeats: 150 },
-                { id: 2, name: 'Global Music Festival', imageUrl: 'https://images.unsplash.com/photo-1490109962388-1ac495a62f83?q=80&w=2070&auto=format', date: '2025-11-15', description: 'Experience a fusion of cultures and music from around the world.', seats: 500, availableSeats: 500 },
-                { id: 3, name: 'Startup Pitch Day', imageUrl: 'https://images.unsplash.com/photo-1556761175-5973dc0f32e7?q=80&w=2070&auto=format', date: '2025-12-05', description: 'Listen to innovative ideas and witness the next big thing in tech.', seats: 75, availableSeats: 75 },
-                { id: 4, name: 'Completed Tech Talk', imageUrl: 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?q=80&w=2070&auto=format', date: '2025-08-01', description: 'A past event for testing completed events.', seats: 100, availableSeats: 0 }
+                { id: 1, name: 'AI & Robotics Summit', imageUrl: 'https://imgs.search.brave.com/TT895ix_INCKTwsbn8_9chp9BQw0Ijl7XceesNFtir0/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly93b3Js/ZHN1bW1pdC5haS93/cC1jb250ZW50L3Vw/bG9hZHMvc2l0ZXMv/NC8yMDE4LzEwL0Rl/bGxvaXR0ZS1zdGFu/ZC1yb2JvdDEwMDAu/cG5n', date: '2025-10-25', description: 'A deep dive into the latest advancements in artificial intelligence and robotics.', seats: 150, availableSeats: 125 },
+                { id: 2, name: 'Global Music Festival', imageUrl: 'https://imgs.search.brave.com/PCoJmZPYts9SrmyDCPF1Zi5uLqvuJtiU4w4L41lSBws/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9pLnBp/bmltZy5jb20vb3Jp/Z2luYWxzLzBiLzcw/LzFhLzBiNzAxYWZl/MDQwN2FmZDc3YzE0/NDE3YWNkZWExZTNj/LmpwZw', date: '2025-11-15', description: 'Experience a fusion of cultures and music from around the world.', seats: 500, availableSeats: 345 },
+                { id: 3, name: 'Tech Talk', imageUrl: 'https://imgs.search.brave.com/GpRuEc21Vls2k3DDCyoyqfsrDLN-hT83n4_fnC_EFZI/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9paDEu/cmVkYnViYmxlLm5l/dC9pbWFnZS41Mzg1/OTM0MTczLjA1Mzgv/ZnBvc3RlcixzbWFs/bCx3YWxsX3RleHR1/cmUsc3F1YXJlX3By/b2R1Y3QsNjAweDYw/MC51My5qcGc', date: '2025-09-11', description: 'A past event for testing completed events.', seats: 100, availableSeats: 0 },
             ];
             localStorage.setItem('events', JSON.stringify(initialEvents));
         }
@@ -763,42 +763,5 @@ function initializeCountdownTimers() {
     });
 }
 
-// Call this after rendering event cards
-initializeCountdownTimers();
 
-
-
-// Toggle notification dropdown
-const notifyBtn = document.getElementById("notifyBtn");
-const notifyBox = document.getElementById("notifyBox");
-const notifyList = document.getElementById("notifyList");
-const notifyCount = document.getElementById("notifyCount");
-
-notifyBtn.addEventListener("click", () => {
-  notifyBox.style.display = notifyBox.style.display === "block" ? "none" : "block";
-});
-
-// Function to add new event (admin side)
-function addEventNotification(eventName) {
-  let notifications = JSON.parse(localStorage.getItem("notifications")) || [];
-  notifications.push({ text: `New Event Added: ${eventName}`, time: new Date().toLocaleString() });
-  localStorage.setItem("notifications", JSON.stringify(notifications));
-  showNotifications();
-}
-
-// Function to display notifications (student side)
-function showNotifications() {
-  let notifications = JSON.parse(localStorage.getItem("notifications")) || [];
-  notifyList.innerHTML = "";
-  notifications.forEach(note => {
-    let li = document.createElement("li");
-    li.textContent = `${note.text} (${note.time})`;
-    notifyList.appendChild(li);
-  });
-  notifyCount.textContent = notifications.length;
-}
-
-
-// Load notifications on page load
-showNotifications();
 

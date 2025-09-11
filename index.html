@@ -152,6 +152,34 @@
   </div>
 </section>
 
+            <!-- Admin Dashboard Section (Initially hidden) -->
+            <div id="admin-dashboard-section" class="admin-section hidden">
+                <h2 class="section-title">Admin Dashboard</h2>
+                <div id="ideas-list" class="ideas-list scrollbar-container">
+                    <!-- Ideas will be dynamically added here -->
+                     <div class="submitted-ideas-section" id="submitted-ideas-section">
+    <h3>Submitted Student Ideas</h3>
+    <p>These ideas are suggestions from students for future events and improvements.</p>
+    <div id="ideas-list" class="ideas-list">
+        <p class="loading-message">Loading ideas...</p>
+    </div>
+</div>
+    
+            <!-- Custom Message Box for Alerts (Replaces alert() and confirm()) -->
+            <div id="modal-backdrop" class="modal-backdrop hidden"></div>
+            <div id="custom-modal" class="modal hidden">
+                <div class="modal-content">
+                    <h3 id="modal-title" class="modal-title"></h3>
+                    <p id="modal-message" class="modal-message"></p>
+                    <div class="modal-buttons">
+                        <button id="modal-confirm-btn" class="modal-btn confirm-btn">Delete</button>
+                        <button id="modal-cancel-btn" class="modal-btn cancel-btn">Cancel</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
 <!-- Contact Us Section -->
 <section id="contact">
   <h2>Contact Us</h2>
